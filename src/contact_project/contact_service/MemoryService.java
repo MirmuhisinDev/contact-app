@@ -7,8 +7,9 @@ import java.util.Scanner;
 public class MemoryService {
     Scanner scanner = new Scanner(System.in);
     public static Memory [] memoryList = new Memory[10];
-    static long id=3;
+    static long id=1;
     public void create(){
+        System.out.println("*** memory create ***");
         Memory memory = new Memory();
         memory.setId(id);
         id++;
@@ -25,6 +26,7 @@ public class MemoryService {
         System.out.println("Success create.");
     }
     public void update(){
+        System.out.println("*** memory update ***");
         System.out.print("MemoryId : ");
         Memory eskiMemory = new Memory();
         long id = scanner.nextLong();
@@ -72,6 +74,7 @@ public class MemoryService {
         }
     }
     public void getOne(){
+        System.out.println("*** memory getOne ***");
         System.out.print("MemoryId : ");
         long id = scanner.nextLong();
         for (int i = 0; i < memoryList.length; i++) {
@@ -81,6 +84,7 @@ public class MemoryService {
         }
     }
     public void delete(){
+        System.out.println("*** memory delete ***");
         System.out.print("MemoryId : ");
         long id = scanner.nextLong();
         for (int i = 0; i < memoryList.length; i++) {

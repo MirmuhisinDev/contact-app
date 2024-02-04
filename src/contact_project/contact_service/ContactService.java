@@ -7,9 +7,9 @@ import java.util.Scanner;
 public class ContactService {
     Scanner scanner = new Scanner(System.in);
     public static Contact[] contactList = new Contact[50];
-    static long id = 3;
-
+    static long id = 1;
     public void create() {
+        System.out.println("*** contact create ***");
         scanner = new Scanner(System.in);
         Contact contact = new Contact();
         contact.setId(id);

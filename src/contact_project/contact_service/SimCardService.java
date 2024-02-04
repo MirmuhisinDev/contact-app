@@ -7,8 +7,9 @@ import java.util.Scanner;
 public class SimCardService {
     Scanner scanner= new Scanner(System.in);
     public static SimCard [] simCardList = new SimCard[50];
-    static long id=3;
+    static long id=1;
     public void create(){
+        System.out.println("*** simCard create ***");
         SimCard simCard = new SimCard();
         simCard.setId(id);
         id++;
@@ -25,6 +26,7 @@ public class SimCardService {
         System.out.println("Success creat.");
     }
     public void update(){
+        System.out.println("*** simCard Update ***");
         System.out.print("simCardId : ");
         SimCard eskiSimCard = new SimCard();
         long id = scanner.nextLong();
@@ -71,6 +73,7 @@ public class SimCardService {
         }
     }
     public void getOne(){
+        System.out.println("*** simCard getOne ***");
         System.out.print("simCardId : ");
         long id = scanner.nextLong();
         for (int i = 0; i < simCardList.length; i++) {
@@ -80,6 +83,7 @@ public class SimCardService {
         }
     }
     public void delete(){
+        System.out.println("*** simCard delete ***");
         System.out.print("simCardId : ");
         long id = scanner.nextLong();
         for (int i = 0; i < simCardList.length; i++) {

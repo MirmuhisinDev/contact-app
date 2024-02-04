@@ -53,7 +53,6 @@ public class PersonService {
             if (persons[i]!=null){
                 if (personId.equals(persons[i].getId())) {
                     persons[i].setAddress(address);
-
                 }
             }
         }

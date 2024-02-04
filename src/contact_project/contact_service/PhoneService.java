@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class PhoneService {
     static Scanner scanner = new Scanner(System.in);
     public static Phone[] phoneList = new Phone[50];
-    static long id=3;
+    static long id=1;
     public void create(){
         Phone phone = new Phone();
         phone.setId(id);
@@ -103,8 +103,8 @@ public class PhoneService {
         return eskiPhone;
     }
     public void memoryAddFromPhone(){
-        System.out.print("PhoneId : ");
-        long phoneID = scanner.nextLong();
+        System.out.println("*** Add Memory ***");
+
         Memory memory = new Memory();
         System.out.print("MemoryId : ");
         long memoryId = scanner.nextLong();
@@ -114,14 +114,18 @@ public class PhoneService {
             }
         }
         for (int i = 0; i < phoneList.length; i++) {
-            if (phoneList[i] != null && phoneList[i].getId() == phoneID) {
+            if (phoneList[i] != null){
                 phoneList[i].setMemory(memory);
             }
         }
     }
     public void memoryDeleteFromPhone(){
-        System.out.print("PhoneId : ");
-        long phoneiD = scanner.nextLong();
+        System.out.println("*** Delete Memory ***");
+        for (int i = 0; i < MemoryService.memoryList.length; i++) {
+            if (MemoryService.memoryList[i] != null) {
+                System.out.println(MemoryService.memoryList[i].toString());
+            }
+        }
         Memory memory = new Memory();
         System.out.print("memoryId : ");
         long Id = scanner.nextLong();
@@ -131,22 +135,21 @@ public class PhoneService {
             }
         }
         for (int i = 0; i < phoneList.length; i++) {
-            if (phoneList[i] != null && phoneList[i].getId() == phoneiD) {
+            if (phoneList[i] != null) {
                 phoneList[i].setMemory(null);
             }
         }
     }
-    public void memoryUpdatefromPhone(){
-        System.out.print("PhoneId : ");
-        long id = scanner.nextLong();
+    public void memoryUpdateFromPhone(){
+        System.out.println("*** Update Memory ***");
         for (int i = 0; i < phoneList.length; i++) {
-            if (phoneList[i] != null && phoneList[i].getId() == id) {
+            if (phoneList[i] != null ) {
                 Memory memory = phoneList[i].getMemory();
-                phoneList[i].setMemory(Apdatememory(memory));
+                phoneList[i].setMemory(updatememory(memory));
             }
         }
     }
-    public Memory Apdatememory(Memory memory){
+    public Memory updatememory(Memory memory){
         System.out.print("memoryId : ");
         Memory eskiMemory = new Memory();
         long id = scanner.nextLong();
@@ -159,8 +162,9 @@ public class PhoneService {
         return memory;
     }
     public Memory changeInfoMemory(Memory eskiMemory){
-        System.out.print("1-hardDisc\n2- RAM\n3-BACK\nSelect: ");
+        System.out.print("Change Info : \n1-hardDisc\n2- RAM\n3-BACK\nSelect: ");
         int select = scanner.nextInt();
+        System.out.println("hardDisc : "+eskiMemory.getHardDisk()+", RAM : "+eskiMemory.getRam());
         switch (select){
             case 1->{
                 System.out.print("New hardDisc : ");
@@ -186,8 +190,7 @@ public class PhoneService {
         return eskiMemory;
     }
     public void simCardAddFromPhone(){
-        System.out.print("phoneId : ");
-        long phonEid = scanner.nextLong();
+        System.out.println("*** Add simCard ***");
         SimCard simCard = new SimCard();
         System.out.print("SimCardId : ");
         long simID = scanner.nextLong();
@@ -197,7 +200,7 @@ public class PhoneService {
             }
         }
         for (int i = 0; i < phoneList.length; i++) {
-            if (phoneList[i] != null && phoneList[i].getId() == phonEid){
+            if (phoneList[i] != null ){
                 SimCard [] simCards = phoneList[i].getSimCard();
                 SimCard [] addedSimCard = addSimCard(simCards, simCard);
                 phoneList[i].setSimCard(addedSimCard);
@@ -214,40 +217,42 @@ public class PhoneService {
         return simCards;
     }
     public void simCardDeleteFromPhone(){
-        System.out.print("phoneId : ");
-        long id = scanner.nextLong();
+        System.out.println("*** Delete simCard ***");
+        for (int i = 0; i < SimCardService.simCardList.length; i++) {
+            if (SimCardService.simCardList[i] != null){
+                System.out.println(SimCardService.simCardList[i].toString());
+            }
+        }
         for (int i = 0; i < phoneList.length; i++) {
-            if (phoneList[i] != null && phoneList[i].getId() == id) {
-                SimCard [] simCards = phoneList[i].getSimCard();
-                phoneList[i].setSimCard(deleteSimCard(simCards));
+            if (phoneList[i] != null) {
+                SimCard [] simCard = phoneList[i].getSimCard();
+                phoneList[i].setSimCard(deleteSimCard(simCard));
             }
         }
     }
-    public SimCard [] deleteSimCard(SimCard [] simCards){
+    public static SimCard [] deleteSimCard(SimCard [] simCard){
         System.out.print("simCardId : ");
-        long id = scanner.nextLong();
-        for (int i = 0; i < simCards.length; i++) {
-            if (simCards[i] != null && simCards[i].getId() == id) {
-                simCards[i] = null;
+        long simId = scanner.nextLong();
+        for (int i = 0; i < simCard.length; i++) {
+            if (simCard[i] != null && simCard[i].getId() == simId) {
+                simCard[i] = null;
             }
         }
-        return simCards;
+        return simCard;
     }
     public void simCardsFromPhone(){
-        System.out.print("phoneID : ");
-        long id = scanner.nextLong();
+        System.out.println("*** SimCards Phone ***");
         for (int i = 0; i < phoneList.length; i++) {
-            if (phoneList[i] != null && phoneList[i].getId() == id) {
+            if (phoneList[i] != null) {
                 SimCard [] simCards = phoneList[i].getSimCard();
                 System.out.println("Phone simCards: "+ Arrays.toString(Arrays.stream(simCards).filter(Objects::nonNull).toArray()));
             }
         }
     }
     public void simCardUpdateFromPhone(){
-        System.out.print("PhoneId : ");
-        long id = scanner.nextLong();
+        System.out.println("*** Update simCard ***");
         for (int i = 0; i < phoneList.length; i++) {
-            if (phoneList[i] != null && phoneList[i].getId() == id) {
+            if (phoneList[i] != null) {
                 SimCard [] simCards = phoneList[i].getSimCard();
                 phoneList[i].setSimCard(updateSimCard(simCards));
             }
@@ -267,6 +272,8 @@ public class PhoneService {
     public SimCard changeSimCardInfo(SimCard eskiSimCard){
         System.out.print("Change info: \n1-company name\n2-number\n3-exit\nSelect: ");
         int select = scanner.nextInt();
+        System.out.println("company name : "+eskiSimCard.getCompanyName()+", number : +998"+eskiSimCard.getNumber());
+
         switch (select){
             case 1->{
                 System.out.print("New company name : ");
@@ -291,9 +298,8 @@ public class PhoneService {
         return eskiSimCard;
     }
     public void contactAddFromPhone(){
+        System.out.println("*** Add contact ***");
         scanner = new Scanner(System.in);
-        System.out.print("phoneId : ");
-        Long oneID = scanner.nextLong();
         Contact contact = new Contact();
         System.out.print("contactId : ");
         Long conID= scanner.nextLong();
@@ -305,12 +311,10 @@ public class PhoneService {
             }
         }
         for (int i = 0; i < phoneList.length; i++) {
-            if (phoneList[i] != null) {
-                if (oneID.equals(phoneList[i].getId())) {
+            if (phoneList[i] != null ) {
                     Contact [] contacts = phoneList[i].getContacts();
                     Contact [] addedContact = addContact(contacts, contact);
                     phoneList[i].setContacts(addedContact);
-                }
             }
         }
     }
@@ -324,44 +328,44 @@ public class PhoneService {
         return contacts;
     }
     public void contactDeleteFromPhone(){
-        System.out.print("PhoneId : ");
-        long phoneID = scanner.nextLong();
+        System.out.println("*** Delete contaact ***");
+        for (int i = 0; i < ContactService.contactList.length; i++) {
+            if (ContactService.contactList[i] != null){
+                System.out.println(ContactService.contactList[i].toString());
+            }
+        }
         for (int i = 0; i < phoneList.length; i++) {
             if (phoneList[i] != null) {
-                if (phoneList[i].getId().equals(phoneID)){
-                    Contact [] contacts = phoneList[i].getContacts();
-                    phoneList[i].setContacts(deleteContact(contacts));
-                }
+                    Contact [] contact = phoneList[i].getContacts();
+                    phoneList[i].setContacts(deleteContact(contact));
             }
         }
     }
-    public Contact [] deleteContact(Contact [] contacts){
+    public Contact [] deleteContact(Contact [] contact){
         System.out.print("ContactId : ");
-        long contId = scanner.nextLong();
-        for (int i = 0; i < contacts.length; i++) {
-            if (contacts[i] ==null) {
-                if (contacts[i].getId() == contId){
-                    contacts[i] = null;
+        long ctId = scanner.nextLong();
+        for (int i = 0; i < contact.length; i++) {
+            if (contact[i] !=null) {
+                if (contact[i].getId() == ctId){
+                    contact[i] = null;
                 }
             }
         }
-        return contacts;
+        return contact;
     }
     public void contactsFromPhone(){
-        System.out.print("PhoneID : ");
-        long phId = scanner.nextLong();
+        System.out.println("*** contacts Phone ***");
         for (int i = 0; i < phoneList.length; i++) {
-            if (phoneList[i] != null && phoneList[i].getId() == phId) {
+            if (phoneList[i] != null) {
                 Contact [] contacts = phoneList[i].getContacts();
                 System.out.println("Phone contacts: " + Arrays.toString(Arrays.stream(contacts).filter(Objects::nonNull).toArray()));
             }
         }
     }
     public void contactUpdateFromPhone(){
-        System.out.print("PhoneId : ");
-        long phnId = scanner.nextLong();
+        System.out.println("*** Update contact *** ");
         for (int i = 0; i < phoneList.length; i++) {
-            if (phoneList[i] != null && phoneList[i].getId() == phnId){
+            if (phoneList[i] != null){
                 Contact [] contacts = phoneList[i].getContacts();
                 phoneList[i].setContacts(updateContact(contacts));
             }
@@ -382,6 +386,7 @@ public class PhoneService {
     public Contact changeInfoContact(Contact eskiContact){
         System.out.print("Change info : \n1-name\n2-number\n3-e_mail\n4-address\n5-exit\nSelect: ");
         int a = scanner.nextInt();
+        System.out.println("name :"+eskiContact.getName()+", number : +998"+eskiContact.getNumber()+", e-mail : "+eskiContact.getEmail()+", address : "+eskiContact.getAddress());
         switch (a){
             case 1->{
                 System.out.print("New name : ");
@@ -390,7 +395,7 @@ public class PhoneService {
                 changeInfoContact(eskiContact);
             }
             case 2->{
-                System.out.print("New number : ");
+                System.out.print("New number : +998");
                 eskiContact.setNumber(scanner.nextInt());
                 System.out.println("Success update.");
                 changeInfoContact(eskiContact);
